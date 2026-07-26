@@ -18,7 +18,7 @@ Planetary Annihilation: TITANS 银河战争模组。添加**民主指挥官**起
 
 | # | 卡牌 ID | 名称 | 目标 | 效果 |
 |---|---------|------|------|------|
-| 1 | `gwc_omega_interceptor` | Omega 拦截系统 | Omega | 加装战术导弹拦截光束 + 空投仓拦截光束 |
+| 1 | `gwc_omega_interceptor` | Omega 拦截系统 | Omega | 加装战术导弹拦截光束 + 空投仓拦截光束（目前工作不正常，会在后续版本中修复） |
 | 2 | `gwc_omega_railgun` | Omega 轨道炮升级 | Omega | 加装 Artemis 磁轨炮，伤害 ×3，可攻击地面/轨道/海上 |
 | 3 | `gwc_avenger_bomber` | Avenger 对地轰炸升级 | Avenger | 加装 Bumblebee 轰炸炸弹，从轨道对地轰炸 |
 | 4 | `gwc_solar_array_conversion` | 太阳能板高效质能转化 | Solar Array | 额外提供 40 金属/秒 |
