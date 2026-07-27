@@ -17,9 +17,9 @@ define([
     buff: function (inventory) {
       inventory.maxCards(inventory.maxCards() + 1);
       inventory.addMods([
-        { file: gwoUnit.avenger, path: "tools", op: "push", value: { spec_id: gwoUnit.bumblebeeWeapon, aim_bone: "bone_root", record_index: 1, fire_event: "fired", muzzle_bone: "bone_root" } },
+        { file: gwoUnit.avenger, path: "tools", op: "push", value: { spec_id: gwoUnit.bumblebeeWeapon, aim_bone: "bone_root", record_index: -1, fire_event: "fired", muzzle_bone: "bone_root" } },
+        { file: gwoUnit.avenger, path: "tools.1.spec_id", op: "tag" },
         { file: gwoUnit.bumblebeeWeapon, path: "target_layers", op: "push", value: ["WL_Orbital"] },
-        { file: gwoUnit.bumblebeeAmmo, path: "spawn_layers", op: "push", value: "WL_Air" },
       ]);
     },
     dull: function () {},

@@ -1,3 +1,6 @@
+// 民主指挥官 — 每次探索额外 +2 科技选项
+// 策略：探索完成后在 star.cardList 中直接追加 2 张额外数据银行卡。
+// 这绕过了 GWAIO 异步初始化导致的 model.explore 包装失效问题。
 (function () {
   function tryPatch() {
     var game = model.game();
@@ -5,31 +8,34 @@
     var inventory = game.inventory();
     if (!inventory || !_.isFunction(inventory.hasCard)) return;
     if (!inventory.hasCard("gwc_start_democracy")) return;
-    if (model._gwoDemoPatched) return;
-    model._gwoDemoPatched = true;
-    var _explore = model.explore;
-    var _reroll = model.rerollTech;
-    model.explore = function (force) {
-      var star = game.galaxy().stars()[game.currentStar()];
-      if (star && model.gwoRerollsUsed) {
-        var orig = model.gwoRerollsUsed();
-        model.gwoRerollsUsed(Math.max(0, orig - 2));
-        var result = _explore.apply(this, arguments);
-        model.gwoRerollsUsed(orig);
-        return result;
+
+    var current = model.explore;
+    if (!current || current._demoWrapped) return;
+
+    var _explore = current;
+    var wrapped = function (force) {
+      var result = _explore.apply(this, arguments);
+      if (!force && result && _.isFunction(result.then)) {
+        result.then(function () {
+          var star = game.galaxy().stars()[game.currentStar()];
+          if (!star) return;
+          var list = star.cardList();
+          if (!_.isArray(list)) return;
+          // 追加 2 张额外科技卡，溢出到库存时自动转为卡槽
+          list.push(
+            { id: "gwc_add_card_slot", allowOverflow: true, unique: Math.random() },
+            { id: "gwc_add_card_slot", allowOverflow: true, unique: Math.random() }
+          );
+          star.cardList(list);
+        });
       }
-      return _explore.apply(this, arguments);
+      return result;
     };
-    model.rerollTech = function () {
-      if (model.gwoRerollsUsed) {
-        var orig = model.gwoRerollsUsed();
-        model.gwoRerollsUsed(Math.max(0, orig - 2));
-        var result = _reroll.apply(this, arguments);
-        model.gwoRerollsUsed(orig);
-        return result;
-      }
-      return _reroll.apply(this, arguments);
-    };
+    wrapped._demoWrapped = true;
+    model.explore = wrapped;
   }
-  var timer = setInterval(function () { try { tryPatch(); } catch (e) {} }, 400);
+
+  setInterval(function () {
+    try { tryPatch(); } catch (e) {}
+  }, 300);
 })();

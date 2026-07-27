@@ -16,7 +16,7 @@ define([
     },
     buff: function (inventory) {
       inventory.maxCards(inventory.maxCards() + 1);
-      inventory.addMods(_.flatten(_.map(gwoGroup.mobile, function (u) { return [{ file: u, path: "build_metal_cost", op: "multiply", value: 0.7 }, { file: u, path: "build_energy_cost", op: "multiply", value: 0.7 }]; })));
+      inventory.addMods(_.map(gwoGroup.mobile, function (u) { return { file: u, path: "build_metal_cost", op: "multiply", value: 0.7 }; }));
     },
     dull: function () {},
   };

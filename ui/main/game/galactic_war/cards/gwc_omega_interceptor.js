@@ -4,7 +4,7 @@ define([
 ], function (gwoCard, gwoUnit) {
   return {
     visible: _.constant(true),
-    describe: _.constant("!LOC:Omega 拦截系统升级 — 为 Omega 轨道战列舰加装战术导弹拦截光束和空投仓拦截光束。"),
+    describe: _.constant("!LOC:Omega 拦截系统升级 — 为 Omega 加装战术导弹拦截光束和空投仓拦截光束。"),
     summarize: _.constant("!LOC:Omega 拦截系统"),
     icon: _.constant("coui://ui/mods/com.pa.quitch.gwaioverhaul/gw_play/img/tech/gwc_orbital_fighter_upgrade.png"),
     audio: function () { return { found: "/VO/Computer/gw/board_tech_available_speed" }; },
@@ -19,8 +19,8 @@ define([
       inventory.addMods([{
         file: gwoUnit.omega, path: "tools", op: "push",
         value: [
-          { spec_id: gwoUnit.gileEBeam, aim_bone: "bone_root", record_index: 2, fire_event: "fired", muzzle_bone: "bone_root" },
-          { spec_id: gwoUnit.umbrellaBeam, aim_bone: "bone_root", record_index: 3, fire_event: "fired", muzzle_bone: "bone_root" },
+          { spec_id: gwoUnit.gileEBeam, aim_bone: "bone_root", record_index: -1, fire_event: "fired", muzzle_bone: "bone_root" },
+          { spec_id: gwoUnit.umbrellaBeam, aim_bone: "bone_root", record_index: -1, fire_event: "fired", muzzle_bone: "bone_root" },
         ],
       }]);
     },

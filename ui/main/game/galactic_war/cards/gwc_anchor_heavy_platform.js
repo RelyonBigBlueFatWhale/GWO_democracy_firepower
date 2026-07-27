@@ -16,7 +16,10 @@ define([
     },
     buff: function (inventory) {
       inventory.maxCards(inventory.maxCards() + 1);
-      inventory.addMods([{ file: gwoUnit.anchor, path: "tools", op: "push", value: { spec_id: gwoUnit.sxxWeapon, aim_bone: "bone_root", record_index: 2, fire_event: "fired", muzzle_bone: "bone_root" } }]);
+      inventory.addMods([
+        { file: gwoUnit.anchor, path: "tools", op: "push", value: { spec_id: gwoUnit.sxxWeapon, aim_bone: "bone_root", record_index: -1, fire_event: "fired", muzzle_bone: "bone_root" } },
+        { file: gwoUnit.anchor, path: "tools.3.spec_id", op: "tag" },
+      ]);
     },
     dull: function () {},
   };

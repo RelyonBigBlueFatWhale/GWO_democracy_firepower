@@ -51,15 +51,22 @@ define([
         var buffCount = inventory.getTag("", "buffCount", 0);
         if (!buffCount) {
           GWCStart.buff(inventory);
+          // 伪造 handIsFull → cardsOfferedCount +1
+          inventory.handIsFull = function () { return true; };
+          // 伪造 hasCard("gwaio_start_lucky") → cardsOfferedCount +1
+          var _hc = inventory.hasCard;
+          inventory.hasCard = function (id) {
+            if (id === "gwaio_start_lucky") return true;
+            return _hc.call(this, id);
+          };
+          // 同时推入实体卡作为双重保险
+          inventory.cards.push({ id: "gwaio_start_lucky" });
           inventory.addUnits(allUnits);
           inventory.maxCards(inventory.maxCards() + 68);
 
-          var costMods = _.flatten(_.map(orbitalUnitSpecs, function (unit) {
-            return [
-              { file: unit, path: "build_metal_cost", op: "multiply", value: 0.5 },
-              { file: unit, path: "build_energy_cost", op: "multiply", value: 0.5 },
-            ];
-          }));
+          var costMods = _.map(orbitalUnitSpecs, function (unit) {
+            return { file: unit, path: "build_metal_cost", op: "multiply", value: 0.5 };
+          });
 
           var hpMods = _.map(orbitalUnitSpecs, function (unit) {
             return { file: unit, path: "max_health", op: "multiply", value: 2.0 };
@@ -90,9 +97,12 @@ define([
             ];
           }));
 
-          var velocityMods = _.map(orbitalProjectileAmmoSpecs, function (ammo) {
-            return { file: ammo, path: "velocity", op: "multiply", value: 2.0 };
-          });
+          var velocityMods = _.flatten(_.map(orbitalProjectileAmmoSpecs, function (ammo) {
+            return [
+              { file: ammo, path: "initial_velocity", op: "multiply", value: 2.0 },
+              { file: ammo, path: "max_velocity", op: "multiply", value: 2.0 },
+            ];
+          }));
 
           var speedMods = _.map(orbitalMobileSpecs, function (unit) {
             return { file: unit, path: "navigation.move_speed", op: "multiply", value: 1.5 };

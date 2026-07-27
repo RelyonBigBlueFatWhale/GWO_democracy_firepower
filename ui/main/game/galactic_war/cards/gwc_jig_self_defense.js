@@ -16,7 +16,10 @@ define([
     },
     buff: function (inventory) {
       inventory.maxCards(inventory.maxCards() + 1);
-      inventory.addMods([{ file: gwoUnit.jig, path: "tools", op: "push", value: { spec_id: gwoUnit.artemisWeapon, aim_bone: "bone_root", record_index: 0, fire_event: "fired", muzzle_bone: "bone_root" } }]);
+      inventory.addMods([
+        { file: gwoUnit.jig, path: "tools", op: "push", value: { spec_id: gwoUnit.artemisWeapon, aim_bone: "bone_root", record_index: -1, fire_event: "fired", muzzle_bone: "bone_root" } },
+        { file: gwoUnit.jig, path: "tools.0.spec_id", op: "tag" },
+      ]);
     },
     dull: function () {},
   };

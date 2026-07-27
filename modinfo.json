@@ -2,24 +2,24 @@
   "context": "client",
   "identifier": "com.pa.democracy.commander",
   "display_name": "GWO-民主火力",
-  "description": "为银河战争添加民主指挥官起始卡牌，以及 Omega 拦截系统、Omega 轨道炮、Avenger 对地轰炸、太阳能板高效质能转化、Jig 超级增效、Jig 自我保护、Anchor 重型防御平台、火控系统、装甲科技、推进器、大批量生产共十一张科技卡牌。",
-  "author": "Kun",
-  "version": "1.0.0",
-  "build": "115958",
+  "description": "GWO-民主火力 — 以轨道战为核心的银河战争卡牌模组。添加 1 张起始指挥官卡（民主指挥官）和 12 张科技卡牌。需 Galactic War Overhaul 作为前置。",
+  "author": "Recorder343",
+  "version": "1.0.1",
+  "build": "124666",
   "date": "2026-07-26",
   "signature": " ",
-  "forum": "",
-  "category": ["titans", "gw", "card"],
+  "forum": "https://github.com/RelyonBigBlueFatWhale/com.pa.Recorder343.GWO_democracy_firepower/discussions",
+  "github": "https://github.com/RelyonBigBlueFatWhale/com.pa.Recorder343.GWO_democracy_firepower",
+  "category": ["titans", "gw", "card", "gameplay"],
   "icon": "",
   "scenes": {
     "gw_play": [
       "coui://ui/mods/com.pa.democracy.commander/tech_cards.js",
-      "coui://ui/mods/com.pa.democracy.commander/specs.js",
-      "coui://ui/mods/com.pa.democracy.commander/lucky_extra.js"
+      "coui://ui/mods/com.pa.democracy.commander/specs.js"
     ],
     "gw_start": ["coui://ui/mods/com.pa.democracy.commander/start_cards.js"]
   },
-  "priority": 100,
+  "priority": 250,
   "titansOnly": true,
   "dependencies": ["com.pa.quitch.gwaioverhaul"]
 }

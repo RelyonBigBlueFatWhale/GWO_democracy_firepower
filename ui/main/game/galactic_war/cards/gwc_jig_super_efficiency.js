@@ -20,7 +20,7 @@ define([
         { file: gwoUnit.jig, path: "production.metal", op: "multiply", value: 10 },
         { file: gwoUnit.jig, path: "production.energy", op: "multiply", value: 10 },
       ]);
-      inventory.addAIMods([{ type: "factory", op: "new", toBuild: "Jig", value: [{ test_type: "DesireMetal" }, { test_type: "CanAffordBuildDemand" }] }]);
+      inventory.addAIMods([{ type: "fabber", op: "new", toBuild: "OrbitalExtractor", value: [{ test_type: "DesireMetal" }, { test_type: "CanAffordBuildDemand" }] }]);
     },
     dull: function () {},
   };
